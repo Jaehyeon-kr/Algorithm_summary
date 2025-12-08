@@ -643,3 +643,535 @@ pivot의 최종 위치(pivotIndex)를 기준으로:
 </details>
 
 ---
+
+## 문제 21: 괄호 타입 검사 - isOpenBracket 구현
+```java
+private static boolean isOpenBracket(char ch) {
+    return ch == '(' || ch == ___________①___________ || ch == ___________②___________;
+}
+```
+**힌트**: 여는 괄호는 총 3종류입니다.
+
+<details>
+<summary>정답 보기</summary>
+
+```java
+// ① '['
+// ② '{'
+```
+
+여는 괄호의 종류: `(`, `[`, `{`
+</details>
+
+---
+
+## 문제 22: 괄호 타입 검사 - isCloseBracket 구현
+```java
+private static boolean isCloseBracket(char ch) {
+    return ch == ___________①___________ || ch == ']' || ch == '}';
+}
+```
+**힌트**: 닫는 괄호는 여는 괄호에 대응됩니다.
+
+<details>
+<summary>정답 보기</summary>
+
+```java
+// ① ')'
+```
+
+닫는 괄호의 종류: `)`, `]`, `}`
+</details>
+
+---
+
+## 문제 23: 괄호 매칭 검사 - isMatchingPair 구현
+```java
+private static boolean isMatchingPair(char open, char close) {
+    return (open == '(' && close == ___________①___________) ||
+           (open == '[' && close == ']') ||
+           (open == ___________②___________ && close == '}');
+}
+```
+**힌트**: 각 여는 괄호는 대응하는 닫는 괄호와 쌍을 이룹니다.
+
+<details>
+<summary>정답 보기</summary>
+
+```java
+// ① ')'
+// ② '{'
+```
+
+괄호 쌍: `()`, `[]`, `{}`
+</details>
+
+---
+
+## 문제 24: 이진 트리 시각화 - printTreeHelper 구조
+```java
+private void printTreeHelper(Node<T> node, String prefix, boolean isTail) {
+    if (node == null) return;
+
+    System.out.println(prefix + (isTail ? ___________①___________ : "├── ") + node.data);
+
+    if (node.left != null || node.right != null) {
+        if (node.right != null) {
+            printTreeHelper(node.right, prefix + (isTail ? "    " : "│   "), ___________②___________);
+        }
+        if (node.left != null) {
+            printTreeHelper(node.left, prefix + (isTail ? "    " : "│   "), true);
+        }
+    }
+}
+```
+**힌트**: 트리 구조를 시각적으로 표현하기 위한 문자열입니다.
+
+<details>
+<summary>정답 보기</summary>
+
+```java
+// ① "└── "
+// ② false
+```
+
+마지막 자식은 `└── `로, 중간 자식은 `├── `로 표현합니다.
+</details>
+
+---
+
+## 문제 25: 이진 트리 노드 구조 - Node 클래스
+```java
+private static class Node<T> {
+    T data;
+    Node<T> ___________①___________;  // 왼쪽 자식
+    Node<T> ___________②___________;  // 오른쪽 자식
+
+    Node(T data) {
+        this.data = data;
+    }
+}
+```
+**힌트**: 이진 트리는 각 노드가 최대 두 개의 자식을 가집니다.
+
+<details>
+<summary>정답 보기</summary>
+
+```java
+// ① left
+// ② right
+```
+
+이진 트리의 각 노드는 왼쪽(left)과 오른쪽(right) 자식을 가집니다.
+</details>
+
+---
+
+## 문제 26: QuickSort - swap 메서드 구현
+```java
+private void swap(int[] arr, int i, int j) {
+    int temp = ___________①___________;
+    arr[i] = ___________②___________;
+    arr[j] = temp;
+}
+```
+**힌트**: 두 요소의 위치를 교환하는 표준적인 방법입니다.
+
+<details>
+<summary>정답 보기</summary>
+
+```java
+// ① arr[i]
+// ② arr[j]
+```
+
+임시 변수(temp)를 사용하여 두 요소를 교환합니다.
+</details>
+
+---
+
+## 문제 27: QuickSort - 배열 정렬 시작
+```java
+public void sort(int[] arr) {
+    if(arr.length < 2 ) return;
+    else {
+        System.out.println("=====Pivot list =====");
+        sort(arr, ___________①___________, ___________②___________);
+        System.out.println("\n=====");
+    }
+}
+```
+**힌트**: 배열의 전체 범위를 정렬합니다.
+
+<details>
+<summary>정답 보기</summary>
+
+```java
+// ① 0
+// ② arr.length - 1
+```
+
+배열의 시작 인덱스(0)부터 마지막 인덱스(arr.length - 1)까지 정렬합니다.
+</details>
+
+---
+
+## 문제 28: QuickSort - 재귀 종료 조건
+```java
+private void sort(int[] arr, int low, int high) {
+    if (___________①___________) {
+        int pivotIndex = partition(arr, low, high);
+        sort(arr, low, pivotIndex - 1);
+        sort(arr, pivotIndex + 1, high);
+    }
+}
+```
+**힌트**: 정렬할 범위가 유효한지 확인합니다.
+
+<details>
+<summary>정답 보기</summary>
+
+```java
+// ① low < high
+```
+
+low가 high보다 작을 때만 정렬을 계속합니다. 같거나 크면 정렬할 요소가 없거나 하나뿐입니다.
+</details>
+
+---
+
+## 문제 29: 이진 트리 - 빈 트리 확인 (BFS)
+```java
+List<T> bfs() {
+    List<T> result = new ArrayList<>();
+
+    if (___________①___________) return result;
+
+    Queue<Node<T>> queue = new LinkedList<>();
+    queue.offer(root);
+    // ... 나머지 코드
+}
+```
+**힌트**: 트리가 비어있으면 순회할 노드가 없습니다.
+
+<details>
+<summary>정답 보기</summary>
+
+```java
+// ① root == null
+```
+
+루트가 null이면 트리가 비어있으므로 빈 리스트를 반환합니다.
+</details>
+
+---
+
+## 문제 30: 이진 트리 - Preorder 메서드 호출
+```java
+List<T> preorder() {
+    List<T> result = new ArrayList<>();
+    preorderHelper(___________①___________, result);
+    return result;
+}
+```
+**힌트**: 순회는 루트 노드부터 시작합니다.
+
+<details>
+<summary>정답 보기</summary>
+
+```java
+// ① root
+```
+
+전위 순회는 루트 노드에서 시작하여 재귀적으로 모든 노드를 방문합니다.
+</details>
+
+---
+
+## 문제 31: 이진 트리 - Inorder 메서드 호출
+```java
+List<T> inorder() {
+    List<T> result = new ArrayList<>();
+    inorderHelper(root, ___________①___________);
+    return ___________②___________;
+}
+```
+**힌트**: 결과를 저장할 리스트를 전달하고 반환합니다.
+
+<details>
+<summary>정답 보기</summary>
+
+```java
+// ① result
+// ② result
+```
+
+헬퍼 메서드에 결과 리스트를 전달하여 순회 결과를 수집한 후 반환합니다.
+</details>
+
+---
+
+## 문제 32: 이진 트리 - Postorder 메서드 호출
+```java
+List<T> postorder() {
+    List<T> result = new ArrayList<>();
+    ___________①___________(root, result);
+    return result;
+}
+```
+**힌트**: 후위 순회를 수행하는 헬퍼 메서드를 호출합니다.
+
+<details>
+<summary>정답 보기</summary>
+
+```java
+// ① postorderHelper
+```
+
+후위 순회 헬퍼 메서드를 호출하여 순회를 시작합니다.
+</details>
+
+---
+
+## 문제 33: BFS - 큐가 비었는지 확인
+```java
+List<T> bfs() {
+    List<T> result = new ArrayList<>();
+    Queue<Node<T>> queue = new LinkedList<>();
+    queue.offer(root);
+
+    while (___________①___________) {
+        var current = queue.poll();
+        result.add(current.data);
+        // ... 나머지 코드
+    }
+
+    return result;
+}
+```
+**힌트**: 큐에 노드가 있는 동안 계속 처리합니다.
+
+<details>
+<summary>정답 보기</summary>
+
+```java
+// ① !queue.isEmpty()
+```
+
+큐가 비어있지 않은 동안 계속해서 노드를 꺼내서 처리합니다.
+</details>
+
+---
+
+## 문제 34: BFS - 현재 노드 처리
+```java
+List<T> bfs() {
+    List<T> result = new ArrayList<>();
+    Queue<Node<T>> queue = new LinkedList<>();
+    queue.offer(root);
+
+    while (!queue.isEmpty()) {
+        var current = ___________①___________;
+        ___________②___________(current.data);
+
+        if (current.left != null) {
+            queue.offer(current.left);
+        }
+        if (current.right != null) {
+            queue.offer(current.right);
+        }
+    }
+
+    return result;
+}
+```
+**힌트**: 큐에서 노드를 꺼내고 결과에 추가합니다.
+
+<details>
+<summary>정답 보기</summary>
+
+```java
+// ① queue.poll()
+// ② result.add
+```
+
+큐에서 현재 노드를 poll하여 꺼내고, 그 데이터를 결과 리스트에 추가합니다.
+</details>
+
+---
+
+## 문제 35: QuickSort - Pivot 값 설정
+```java
+private int partition(int[] arr, int low, int high) {
+    int pivot_index = (low + high) / 2;
+    swap(arr, pivot_index, low);
+
+    int pivot = ___________①___________;
+
+    int i = low + 1;
+    int j = high;
+    // ... 나머지 코드
+}
+```
+**힌트**: Pivot을 맨 앞으로 이동시킨 후 그 값을 저장합니다.
+
+<details>
+<summary>정답 보기</summary>
+
+```java
+// ① arr[low]
+```
+
+Pivot을 low 위치로 이동시켰으므로 arr[low]가 pivot 값입니다.
+</details>
+
+---
+
+## 문제 36: QuickSort - 포인터 초기화
+```java
+private int partition(int[] arr, int low, int high) {
+    int pivot = arr[low];
+
+    int i = ___________①___________;  // 왼쪽에서 시작
+    int j = ___________②___________;  // 오른쪽에서 시작
+
+    while (true) {
+        // ... 나머지 코드
+    }
+}
+```
+**힌트**: i는 pivot 다음부터, j는 끝에서 시작합니다.
+
+<details>
+<summary>정답 보기</summary>
+
+```java
+// ① low + 1
+// ② high
+```
+
+i는 pivot(low) 다음 위치부터, j는 배열의 끝(high)에서 시작합니다.
+</details>
+
+---
+
+## 문제 37: QuickSort - 요소 교환
+```java
+private int partition(int[] arr, int low, int high) {
+    int pivot = arr[low];
+    int i = low + 1;
+    int j = high;
+
+    while (true) {
+        while (i <= j && arr[i] <= pivot) {
+            i++;
+        }
+        while (i <= j && arr[j] >= pivot) {
+            j--;
+        }
+        if (i > j) {
+            break;
+        }
+        ___________①___________(arr, i, j);
+    }
+    // ... 나머지 코드
+}
+```
+**힌트**: i와 j 위치의 요소를 교환합니다.
+
+<details>
+<summary>정답 보기</summary>
+
+```java
+// ① swap
+```
+
+arr[i]와 arr[j]를 교환하여 작은 값은 왼쪽, 큰 값은 오른쪽으로 이동시킵니다.
+</details>
+
+---
+
+## 문제 38: 괄호 검사기 - 테스트 케이스 실행
+```java
+public static void main(String[] args) {
+    System.out.println("=== 괄호 검사기 테스트 ===");
+    char[][] testCases = {
+        {'(', ')'},
+    };
+    IISEStackSol2025 sol = new ___________①___________();
+
+    for (int i = 0; i < testCases.length; i++) {
+        char[] brackets = testCases[i];
+        boolean result = sol.___________②___________(brackets);
+        // ... 출력 코드
+    }
+}
+```
+**힌트**: 솔루션 객체를 생성하고 isPair 메서드를 호출합니다.
+
+<details>
+<summary>정답 보기</summary>
+
+```java
+// ① IISEStackSol2025
+// ② isPair
+```
+
+솔루션 클래스의 인스턴스를 생성하고 isPair 메서드를 호출하여 괄호 쌍을 검사합니다.
+</details>
+
+---
+
+## 문제 39: 이진 트리 - 제네릭 타입 선언
+```java
+class BinaryTree<___________①___________> {
+
+    private Node<___________②___________> root;
+
+    private static class Node<T> {
+        T data;
+        Node<T> left;
+        Node<T> right;
+
+        Node(T data) {
+            this.data = data;
+        }
+    }
+}
+```
+**힌트**: 제네릭 타입 파라미터를 사용하여 다양한 타입을 저장할 수 있습니다.
+
+<details>
+<summary>정답 보기</summary>
+
+```java
+// ① T
+// ② T
+```
+
+제네릭 타입 파라미터 `T`를 사용하여 Integer, String 등 다양한 타입의 데이터를 저장할 수 있습니다.
+</details>
+
+---
+
+## 문제 40: 이진 트리 - 생성자 초기화
+```java
+BinaryTree() {
+    this.root = ___________①___________;
+}
+```
+**힌트**: 빈 트리는 루트가 없습니다.
+
+<details>
+<summary>정답 보기</summary>
+
+```java
+// ① null
+```
+
+빈 이진 트리를 생성할 때 루트를 null로 초기화합니다.
+</details>
+
+---
+
+**문제 끝! 총 40개 완성**
